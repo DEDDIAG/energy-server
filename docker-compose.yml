@@ -1,0 +1,53 @@
+version: '3'
+services:
+  ssh-server:
+      build: ./ssh-server
+      image: ssh-server
+      volumes:
+          - ./volume/home/:/home
+      ports:
+          - "2020:22"
+
+  psql:
+      image: postgres:10.0-alpine
+      environment:
+          POSTGRES_PASSWORD: password
+          POSTGRES_USER: postgres
+      volumes:
+          - ./volume/home/:/home
+          - psql-log:/var/log/postgresql
+          - psql-data:/var/lib/postgresql/data
+          - ./volume/docker-entrypoint-initdb.d/00_init_db.sql:/docker-entrypoint-initdb.d/00_init_db.sql
+          - ./backend/sql/10_functions.sql:/docker-entrypoint-initdb.d/10_functions.sql
+
+  certs:
+    image: walwe/dehydrated
+    volumes:
+      - ./domains.txt:/dehydrated/domains.txt:ro
+      - certificates:/dehydrated/certs
+      - acme-challanges:/dehydrated/acme-challenges
+
+  frontend:
+     image: nginx:1.19.2-alpine
+     volumes:
+          - ./frontend:/usr/share/nginx/html
+          - ./nginx.conf:/etc/nginx/conf.d/default.conf
+          - ./.htpasswd:/.htpasswd
+          - certificates:/certs/certificates/:ro
+          - acme-challanges:/certs/acme-challenges:ro
+     ports:
+          - "80:80"
+          - "443:443"
+
+  backend:
+     build: ./backend
+     volumes:
+          - ./backend/config/config.ini:/work/config/config.ini
+     links:
+          - psql:psql
+
+volumes:
+  certificates:
+  acme-challanges:
+  psql-data:
+  psql-log:

@@ -1,0 +1,15 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col col-md-4">
+            <div datepicker  ng-model="dateRangePicker" name="dateRangePicker"></div>
+        </div>
+        <div class="col col-md-2 pull-right text-right" ng-if="get_selected_item() !== undefined && energy !== undefined">
+            {{ energy | number: 4}} kWh
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-md">
+            <div line-plot/></div>
+        </div>
+    </div>
+</div>

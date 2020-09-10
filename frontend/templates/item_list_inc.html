@@ -1,0 +1,25 @@
+<table class="table table-hover">
+    <thead>
+    <th>ID</th>
+    <th>label</th>
+    <th>First Date</th>
+    <th>Last Date</th>
+    <th></th>
+    </thead>
+  <tr ng-repeat="item in item_list">
+      <td role="button" ng-click="gotoItem(item.item_id)">{{ item.item_id }}</td>
+      <td role="button" ng-click="gotoItem(item.item_id)">{{ item.label }}</td>
+      <td role="button" ng-click="gotoItem(item.item_id)">{{ item.first_date.format('YYYY-MM-DD HH:mm:ss') }}</td>
+      <td role="button" ng-click="gotoItem(item.item_id)">{{ item.last_date.format('YYYY-MM-DD HH:mm:ss') }}</td>
+      <td>
+          <div class="dropdown">
+              <span role="button" class="glyphicon glyphicon-option-horizontal" data-toggle="dropdown"></span>
+              <ul class="dropdown-menu">
+                  <li class="dropdown-header">Charts</li>
+                  <li class="nav-item"><a href="#!/item/{{item.item_id}}/range">Range</a></li>
+                  <li class="nav-item"><a href="#!/item/{{item.item_id}}/events">Events</a></li>
+              </ul>
+          </div>
+      </td>
+  </tr>
+</table>

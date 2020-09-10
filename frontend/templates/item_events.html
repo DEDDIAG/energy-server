@@ -1,0 +1,21 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col col-md">
+       <select id="selectEvent"
+            name="Events"
+            ng-options="idx as (ev.start_date.format('YYYY-MM-DD HH:mm:ss') + ' (' + ev.duration.humanize() +')') for (idx, ev) in events"
+            ng-model="selectedEvent"
+            ng-change="selectedEventChanged()"
+            multiple
+            ng-show="event_data.length > 0"
+            data-width="auto"
+       >
+        </select>
+        <span ng-show="event_data.length == 0">No Events available</span>
+    </div>
+    <div class="col col-md">
+        <div line-plot /></div>
+    </div>
+  </div>
+</div>

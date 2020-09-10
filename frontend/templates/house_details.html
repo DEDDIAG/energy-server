@@ -1,0 +1,5 @@
+
+<div ng-if="items.length > 0">
+    <div ng-include="'/templates/item_list_inc.html'" ng-init="item_list=(items | where: {'house_id': selected_house_id})"></div>
+</div>
+

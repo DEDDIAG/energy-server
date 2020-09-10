@@ -1,0 +1,100 @@
+.sidebar {
+    float: left;
+    clear: left;
+}
+
+.navbar-brand a {
+    color: #ffffff;
+}
+
+#topbar {
+    background-color: #f39100;
+}
+
+#plot {
+    float: left;
+}
+
+.nav-control {
+    margin: 10px;
+    float: left;
+}
+
+option {
+  border-bottom:1px solid #444;
+  padding:.2em 1.2em;
+ }
+
+input {
+  padding:.2em 1.2em;
+ }
+
+
+#selectEvent {
+     -webkit-appearance: menulist-button;
+    border: 0;
+}
+
+.plot {
+    width: 80%;
+    float: left;
+}
+
+.main {
+    width: 100%;
+    float: left;
+    clear: both;
+}
+
+@media (max-device-width: 1024px) {
+        #selectedEvent {
+            height: 1 !important;
+            background-color: #d1d1d1;;
+        }
+}
+
+.alert {
+    margin: 0px;
+    padding: 10px;
+}
+
+.smNavBox {
+    margin: 0px;
+    padding: 5px;
+    color: #ffffff;
+}
+
+.smNavBox > a {
+    margin: 0px;
+    padding: 5px;
+    color: #ffffff;
+}
+
+.lgNavBox {
+    margin: 0px;
+    padding: 10px 30px;
+    color: #ffffff;
+    font-size: 20px;
+}
+
+.table .dropdown-menu {
+    min-width: 0;
+}
+
+@media (max-width: 700px) {
+    .table .dropdown-menu {
+        float: right !important;
+        right: 0;
+        left: auto;
+    }
+}
+
+.editable-wrap {
+    white-space: normal;
+}
+
+.annotation-table {
+    max-height: 300px;
+    overflow: auto;
+    display: block;
+}

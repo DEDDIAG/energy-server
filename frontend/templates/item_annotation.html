@@ -1,0 +1,62 @@
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col col-md-3">
+            <div datepicker  ng-model="dateRangePicker" name="dateRangePicker"></div>
+        </div>
+        <div class="col col-md-2 pull-right text-right" ng-if="get_selected_item() !== undefined && energy !== undefined">
+            {{ energy | number: 4}} kWh
+        </div>
+    </div>
+    <div class="row" style="height:50px;"></div>
+    <div class="row col-sm-6">
+          <table class="table table-bordered table-hover annotation-table">
+            <tr ng-repeat="annotation in annotation_data" ng-class="{'warning':annotation.id == undefined}">
+              <td class="col col-md-1">
+
+                <span editable-select="annotation.label_id" e-form="rowform" e-ng-options="s.id as s.text for s in annotation_labels" e-required >
+                    <span>{{annotation_labels[annotation.label_id].text}}</span>
+                </span>
+              </td>
+
+              <td class="col col-md-2">
+                <div e-form="rowform" editable-combodate="annotation.start_date" e-required e-minute-Step="1" e-second-step="1" e-format="DD-MM-YYYY HH:mm:ss" e-template="DD / MM / YYYY   HH : mm : ss">
+                    {{annotation.start_date.format('DD/MM/YYYY H:mm:ss')}}
+                </div>
+              </td>
+
+              <td class="col col-md-2">
+                <div e-form="rowform" editable-combodate="annotation.stop_date" e-required e-minute-Step="1" e-second-step="1" e-format="DD-MM-YYYY HH:mm:ss" e-template="DD / MM / YYYY   HH : mm : ss">
+                    {{annotation.stop_date.format('DD/MM/YYYY H:mm:ss')}}
+                </div>
+              </td>
+
+              <td style="white-space: nowrap" class="col col-md-1">
+                <!-- form -->
+                <form editable-form name="rowform" onbeforesave="saveAnnotation(annotation, annotation.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == annotation">
+                  <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary glyphicon glyphicon-ok">
+
+                  </button>
+                  <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default glyphicon glyphicon-remove">
+
+                  </button>
+                </form>
+                <div class="buttons" ng-show="!rowform.$visible">
+                  <button type="button" class="btn btn-primary glyphicon glyphicon-pencil" ng-click="rowform.$show()"></button>
+                  <button type="button" class="btn btn-danger glyphicon glyphicon-trash" ng-click="deleteAnnotation(annotation)"></button>
+                </div>
+              </td>
+            </tr>
+
+          </table>
+                <button type="button" class="btn btn-default glyphicon glyphicon-plus" ng-click="addAnnotation()"></button>
+    </div>
+    <div class="row">
+    </div>
+
+    <div class="row">
+        <div class="col col-md">
+            <div line-annotation-plot line-plot /></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<table class="table table-hover">
+    <thead>
+        <th>ID</th>
+        <th>Items</th>
+        <th>First Date</th>
+        <th>Last Date</th>
+        <th></th>
+    </thead>
+    <tbody ng-repeat="(key, value) in items | filterBy: ['house_id']: house_id | groupBy: 'house_id'">
+        <tr>
+            <td role="button" ng-click="gotoHouse(key)" class="clickable">House {{ key }}</td>
+            <td role="button" ng-click="gotoHouse(key)">{{ value.length }}</td>
+            <td role="button" ng-click="gotoHouse(key)">{{ value | minDate: 'first_date' | formatDate }}</td>
+            <td role="button" ng-click="gotoHouse(key)">{{ value | maxDate: 'last_date' | formatDate }}</td>
+            <td role="button" data-toggle="collapse" data-target="#{{ key }}-detail" class="clickable col-md-2"><span class="caret"></span></td>
+        </tr>
+        <tr id="{{ key }}-detail" class="collapse">
+            <td colspan="5">
+                <div ng-include="'/templates/item_list_inc.html'" ng-init="item_list=value"></div>
+            </td>
+        </tr>
+  </tbody>
+</table>

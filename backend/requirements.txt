@@ -1,0 +1,12 @@
+flask
+flask-restplus
+flask-sqlalchemy
+Flask-ini
+click
+numpy
+pandas
+psycopg2
+sqlalchemy
+iso8601
+# uwsgi
+werkzeug<1.0.0
